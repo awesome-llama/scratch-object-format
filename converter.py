@@ -4,7 +4,7 @@ USE_VALUE_ONLY_OBJECTS = True
 # V=value, P=pointer, A=array, D=dict, AV=array of values, DV=dict of values
 
 class IterateAddresses:
-    """Iterator for addresses"""
+    """Count from a start value for a given number of times and step size"""
 
     def __init__(self, repeat, start=0, step=1):
         self.i = start - step
@@ -23,10 +23,10 @@ class IterateAddresses:
 
 
 def encode(obj, as_string=True):
-    
-    output = [1] # start with an item to replace later
 
     def contains_values_only(obj):
+        """Determine whether the object has anything nested"""
+
         if isinstance(obj, dict):
             for e in obj.values():
                 if isinstance(e, list) or isinstance(e, dict):
@@ -42,8 +42,6 @@ def encode(obj, as_string=True):
         """Recursive function to add objects to the output list"""
 
         if isinstance(obj, list):
-            # determine whether the array has anything nested
-
             if USE_VALUE_ONLY_OBJECTS and contains_values_only(obj):
                 contents = ['AV', len(obj)]
                 contents.extend(obj)
@@ -73,19 +71,20 @@ def encode(obj, as_string=True):
             return ['P', address]
 
         else:
-            return ['V', obj]
+            return ['V', obj] # add value
 
-
+    output = [''] # this item gets replaced with an address to the root object
+    
     root = add_object(output, obj)
     if root[0] == 'P':
         output[0] = root[1]
     else:
-        # value
+        # not a pointer, store it and create an address to it
         output[0] = len(output) + 1
         output.extend(root)
 
     if as_string:
-        return [str(x) for x in output]
+        return [str(x) for x in output] # convert to a string (for scratch)
     else:
         return output
 
@@ -93,7 +92,7 @@ def encode(obj, as_string=True):
 
 def decode(obj):
 
-    def add_object(obj: list, address):
+    def get_object(obj: list, address):
         """Recursive function"""
 
         address = int(address)
@@ -103,12 +102,12 @@ def decode(obj):
                 return obj[address+1]
             
             case 'P':
-                return add_object(obj, int(obj[address+1]) - 1)
+                return get_object(obj, int(obj[address+1]) - 1)
             
             case 'A':
                 output = []
                 for i in IterateAddresses(int(obj[address+1]), address+2, 2):
-                    output.append(add_object(obj, i))
+                    output.append(get_object(obj, i))
                 return output
             
             case 'AV':
@@ -120,7 +119,7 @@ def decode(obj):
             case 'D':
                 output = {}
                 for i in IterateAddresses(int(obj[address+1]), address+2, 3):
-                    output[obj[i]] = add_object(obj, i+1)
+                    output[obj[i]] = get_object(obj, i+1)
                 return output
 
             case 'DV':
@@ -132,4 +131,4 @@ def decode(obj):
             case _:
                 raise Exception('data type unknown')
             
-    return add_object(obj, int(obj[0])-1)
+    return get_object(obj, int(obj[0])-1)
