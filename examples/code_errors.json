@@ -1,0 +1,16 @@
+{
+    "awesome-llama": [{
+            "purpose": "error",
+            "user": "awesome-llama",
+            "msg_count": "1",
+            "msg_total": "1",
+            "content": "msg=test"
+        }, {
+            "purpose": "error",
+            "user": "awesome-llama",
+            "msg_count": "1",
+            "msg_total": "1",
+            "content": "msg=test2"
+        }
+    ]
+}
