@@ -1,0 +1,10 @@
+2
+AV
+7
+gold
+gray
+green
+pink
+red
+indigo
+white
