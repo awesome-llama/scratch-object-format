@@ -1,5 +1,5 @@
 
-USE_VALUE_ONLY_OBJECTS = False
+USE_VALUE_ONLY_OBJECTS = True
 
 # V=value, P=pointer, A=array, D=dict, AV=array of values, DV=dict of values
 

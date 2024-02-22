@@ -1,16 +1,9 @@
-A
+AV
 7
-V
 gold
-V
 gray
-V
 green
-V
 pink
-V
 red
-V
 indigo
-V
 white

@@ -1,12 +1,7 @@
-A
+AV
 5
-V
 alfa
-V
 bravo
-V
 charlie
-V
 delta
-V
 echo
