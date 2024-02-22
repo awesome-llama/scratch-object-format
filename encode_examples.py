@@ -12,8 +12,10 @@ def list_files(directory):
     return files
 
 if True:
+    print('encoding files...')
     DIRECTORY = 'examples/'
     for file_name in list_files(DIRECTORY):
+        print('- ' + file_name)
         with open(DIRECTORY+file_name) as f:
             data = json.loads(f.read())
 
@@ -23,8 +25,10 @@ if True:
             f.writelines([str(o)+'\n' for o in output])
 
 if True:
+    print('decoding files...')
     DIRECTORY = 'examples/encoded/'
     for file_name in list_files(DIRECTORY):
+        print('- ' + file_name)
         with open(DIRECTORY+file_name) as f:
             data = f.readlines()
             data = [d[0:-1] for d in data] # remove newline
