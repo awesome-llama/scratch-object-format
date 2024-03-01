@@ -1,0 +1,9 @@
+[tool.ruff]
+lint.select            = ["ALL"]
+lint.ignore            = ["ANN101", "S101", "PT009", "E501", "COM", "FBT"]
+lint.extend-safe-fixes = ["ALL"]
+unsafe-fixes           = true
+
+[tool.ruff.lint.isort]
+required-imports = ["from __future__ import annotations"]
+no-lines-before  = ["standard-library", "third-party", "first-party", "local-folder"]
