@@ -34,4 +34,4 @@ if True:
             data = [d[0:-1] for d in data] # remove newline
 
         with open(f'{DIRECTORY}decoded/{file_name}.json', 'w') as f:
-            f.write(json.dumps(converter.decode(data), indent=2))
+            f.write(json.dumps(converter.decode(data), indent=4))

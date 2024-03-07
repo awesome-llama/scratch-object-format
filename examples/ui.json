@@ -1,0 +1,33 @@
+{
+    "type": "window",
+    "title": "Example UI",
+    "x": 0,
+    "y": 0,
+    "width": 100,
+    "height": 200,
+    "show": true,
+    "enabled": true,
+    "content": [
+        {
+            "type": "text",
+            "value": "This is an example user interface!"
+        },
+        {
+            "type": "checkbox",
+            "title": "Confirm",
+            "value": true
+        },
+        {
+            "type": "input text",
+            "title": "Text box:",
+            "value": ""
+        },
+        {
+            "type": "radio buttons",
+            "style": "stack",
+            "title": "choose one...",
+            "options": ["A", "B", "C"],
+            "value": 0
+        }
+    ]
+}
